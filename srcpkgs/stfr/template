@@ -1,6 +1,6 @@
 # Template file for 'st'
 pkgname=stfr
-version=1.0
+version=1.1
 revision=1
 build_style=gnu-makefile
 make_use_env=compliant
@@ -11,8 +11,8 @@ short_desc="Suckless terminal implementation for X Francis Ricle fork's"
 maintainer="FrancisRicle <francisricleruiz@gmail.com>"
 license="MIT"
 homepage="https://st.suckless.org"
-distfiles="https://github.com/FrancisRicle/st/archive/refs/tags/st.tar.gz"
-checksum=3096e4b09e0fe82e771dabc3fcd14ff9506e8eb74ae862668583f937db6abb2c
+distfiles="https://github.com/FrancisRicle/st/archive/refs/tags/st-${version}.tar.gz"
+checksum=fda30933ff95d562e74aceab2b1bdbb9164d6eeee7da72b4fe2b02d266d6fa14
 pre_build() {
 	mkdir -p ${DESTDIR}/usr/share/terminfo
 }
