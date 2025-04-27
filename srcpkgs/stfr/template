@@ -1,0 +1,28 @@
+# Template file for 'st'
+pkgname=stfr
+version=1.0
+revision=1
+build_style=gnu-makefile
+make_use_env=compliant
+hostmakedepends="pkg-config"
+makedepends="fontconfig-devel libX11-devel libXft-devel harfbuzz freetype"
+depends=""
+short_desc="Suckless terminal implementation for X Francis Ricle fork's"
+maintainer="FrancisRicle <francisricleruiz@gmail.com>"
+license="MIT"
+homepage="https://st.suckless.org"
+distfiles="https://github.com/FrancisRicle/st/archive/refs/tags/st.tar.gz"
+checksum=3096e4b09e0fe82e771dabc3fcd14ff9506e8eb74ae862668583f937db6abb2c
+pre_build() {
+	mkdir -p ${DESTDIR}/usr/share/terminfo
+}
+
+pre_install() {
+	export TERMINFO=${DESTDIR}/usr/share/terminfo
+}
+
+post_install() {
+	vdoc README
+	vdoc FAQ
+	vlicense LICENSE
+}

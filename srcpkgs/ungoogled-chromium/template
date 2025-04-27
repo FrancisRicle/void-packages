@@ -1,0 +1,39 @@
+pkgname=ungoogled-chromium
+revision=1
+archs="x86_64*"
+nocheck=yes
+hostmakedepends="pkg-config python3"
+depends="nss nspr alsa-lib gtk+3"
+short_desc="Ungoogled Chromium (portable version for glibc and musl)"
+maintainer="FrancisRicle <francisricleruiz@example.com>"
+license="BSD-3-Clause"
+homepage="https://ungoogled-software.github.io/"
+
+# Definimos el distfile según la libc:
+case "$XBPS_TARGET_LIBC" in
+    glibc)
+				version=135.0.7049.114
+				wrksrc="${pkgname}-${version}"
+        distfiles="https://github.com/Cubufied/${pkgname}-binaries/releases/download/${version}-1/ungoogled-chromium_${version}-1_linux.tar.xz"
+				checksum=657f3073688ee05338b6603ccd9aa7f25987cf81efeb89c699c0087d8ecb14a6
+        ;;
+    musl)
+				shlib_provides="libc.musl-x86_64.so.1"
+				version=84.0.4147.135
+				wrksrc="${pkgname}-${version}"
+        distfiles="https://github.com/Cubified/${pkgname}-binaries/releases/download/${version}-1.musl1/ungoogled-chromium_${version}-1.musl1_linux.tar.xz"
+				checksum=f2f503bc38ca670a898ae4a736cf972a0c3fbfb2d3205d7c76c9478355bde7b0
+        ;;
+esac
+
+
+do_install() {
+    vmkdir usr/lib/ungoogled-chromium
+    cp -r * ${DESTDIR}/usr/lib/ungoogled-chromium
+
+    vmkdir usr/bin
+    echo '#!/bin/sh' > ${DESTDIR}/usr/bin/ungoogled-chromium
+    echo 'exec /usr/lib/ungoogled-chromium/chrome "$@"' >> ${DESTDIR}/usr/bin/ungoogled-chromium
+    chmod +x ${DESTDIR}/usr/bin/ungoogled-chromium
+}
+

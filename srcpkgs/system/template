@@ -1,0 +1,13 @@
+# Template file for 'xorg-minimal'
+pkgname=system
+version=1.0
+revision=2
+build_style=meta
+depends=" base-dev
+	alsa-tools alsa-utils alsa-lib ungoogled-chromium st libX11
+	xorg-mininal setxkbmap herbstluftwm stow xbacklight xclipboard
+	xinput xprop xset xsetroot xrdb xtools github-cli lxdm"
+short_desc="My system's packages"
+homepage="http://xorg.freedesktop.org/"
+license="MIT"
+maintainer="Orphaned <orphan@voidlinux.org>"
